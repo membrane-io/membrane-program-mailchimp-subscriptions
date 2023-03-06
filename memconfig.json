@@ -1,0 +1,28 @@
+{
+  "schema": {
+    "types": [
+      {
+        "name": "Root",
+        "actions": [
+          {
+            "name": "subscribe",
+            "type": "Void"
+          },
+          {
+            "name": "unsubscribe",
+            "type": "Void"
+          },
+          {
+            "name": "handler",
+            "type": "Void"
+          }
+        ]
+      }
+    ]
+  },
+  "dependencies": {
+    "sms": "sms:",
+    "mailchimp": "mailchimp:",
+    "audience": "mailchimp:audiences.one(id:\"26f7ecad1a\")"
+  }
+}
