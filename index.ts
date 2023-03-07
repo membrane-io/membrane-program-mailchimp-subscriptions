@@ -12,6 +12,6 @@ export async function unsubscribe() {
 }
 
 export async function handler({ event }) {
-  const email = await event.member.email_address.$get();
-  await nodes.sms.send({ message: `Hello! You have a new subscriber on your website. ${email}` }).$invoke();
+  const email = await event.member.email_address;
+  await nodes.sms.send({ message: `Hello! You have a new subscriber on your website. ${email}` });
 }  
