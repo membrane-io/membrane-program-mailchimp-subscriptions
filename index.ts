@@ -1,17 +1,27 @@
 // `nodes` contain any nodes you add from the graph (dependencies)
 // `root` is a reference to this program's root node
 // `state` is an object that persists across program updates. Store data here.
-import { nodes, root, state } from 'membrane';
+import { nodes, root, state } from "membrane";
+const { mailchimp } = nodes;
 
-export async function subscribe() {
-  await nodes.audience.subscriptions.$subscribe(root.handler);
-}
+export const Root = {
+  status: () => {
+    if (!state.guildId) {
+      return "Please set the audienceId with [configure](:configure)";
+    } else {
+      return "Ready";
+    }
+  },
+};
 
-export async function unsubscribe() {
-  await nodes.audience.subscriptions.$unsubscribe();
+export async function configure({ args: { audienceId } }) {
+  const audience = mailchimp.audiences.one({ id: audienceId });
+  state.name = await audience.name;
+  await audience.subscribed.$subscribe(root.handler);
 }
 
 export async function handler({ event }) {
-  const email = await event.member.email_address;
-  await nodes.sms.send({ message: `Hello! You have a new subscriber on your website. ${email}` });
-}  
+  await nodes.sms.send({
+    message: `New subscriber on "${state.name}": ${event.email}`,
+  });
+}

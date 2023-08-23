@@ -3,18 +3,27 @@
     "types": [
       {
         "name": "Root",
+        "description": "Membrane program that send a sms when a new subscriber is added to a mailchimp audience",
         "actions": [
           {
-            "name": "subscribe",
-            "type": "Void"
-          },
-          {
-            "name": "unsubscribe",
-            "type": "Void"
+            "name": "configure",
+            "type": "Void",
+            "params": [
+              {
+                "name": "audienceId",
+                "type": "String"
+              }
+            ]
           },
           {
             "name": "handler",
             "type": "Void"
+          }
+        ],
+        "fields": [
+          {
+            "name": "status",
+            "type": "String"
           }
         ]
       }
@@ -22,7 +31,6 @@
   },
   "dependencies": {
     "sms": "sms:",
-    "mailchimp": "mailchimp:",
-    "audience": "mailchimp:audiences.one(id:\"26f7ecad1a\")"
+    "mailchimp": "mailchimp:"
   }
 }

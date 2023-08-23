@@ -1,465 +1,15 @@
 {
   "types": {
-    "mailchimp": {
-      "gref_hash": "33e52790160ebefdd42401825dc847ab32e37446f05416f0a1075fcffd03dbd2",
-      "type": "mailchimp:Root"
-    },
-    "audience": {
-      "gref_hash": "4fca420ddb243a3f48c9bea9f5b6dc451baecc2b0ba038af263717a4a6f65bf5",
-      "type": "mailchimp:Audience"
-    },
     "sms": {
       "gref_hash": "9f3731cc47302939f352abadad67485a33ed9eb069680d1c83dfcd21f1656c5e",
       "type": "sms:Root"
+    },
+    "mailchimp": {
+      "gref_hash": "33e52790160ebefdd42401825dc847ab32e37446f05416f0a1075fcffd03dbd2",
+      "type": "mailchimp:Root"
     }
   },
   "imports": [
-    {
-      "name": "sms",
-      "schema": {
-        "types": [
-          {
-            "name": "Root",
-            "description": "Send yourself text messages",
-            "actions": [
-              {
-                "name": "configure",
-                "description": "Configure your phone number to receive text messages. This action must be invoked before trying to send messages.",
-                "type": "Void",
-                "params": [
-                  {
-                    "name": "number",
-                    "type": "String"
-                  }
-                ],
-                "hints": {}
-              },
-              {
-                "name": "send",
-                "description": "Sends an SMS to the configured phone number",
-                "type": "Void",
-                "params": [
-                  {
-                    "name": "message",
-                    "type": "String"
-                  }
-                ],
-                "hints": {}
-              },
-              {
-                "name": "handleSms",
-                "description": "Tells the user program that an sms was received. You don't normally have to use this.",
-                "type": "Void",
-                "params": [
-                  {
-                    "name": "message",
-                    "type": "String"
-                  }
-                ],
-                "hints": {
-                  "hidden": true
-                }
-              }
-            ],
-            "fields": [
-              {
-                "name": "gref",
-                "description": "A reference to this node",
-                "type": "Ref",
-                "ofType": "Root",
-                "params": [],
-                "hints": {}
-              }
-            ],
-            "events": [
-              {
-                "name": "received",
-                "description": "",
-                "type": "ReceivedEvent",
-                "params": [],
-                "hints": {}
-              }
-            ]
-          },
-          {
-            "name": "ReceivedEvent",
-            "description": "",
-            "actions": [],
-            "fields": [
-              {
-                "name": "message",
-                "description": "",
-                "type": "String",
-                "params": [],
-                "hints": {}
-              },
-              {
-                "name": "gref",
-                "description": "A reference to this node",
-                "type": "Ref",
-                "ofType": "ReceivedEvent",
-                "params": [],
-                "hints": {}
-              }
-            ],
-            "events": []
-          }
-        ],
-        "imports": [
-          {
-            "name": "sys-process",
-            "schema": {
-              "types": [
-                {
-                  "name": "Root",
-                  "description": "",
-                  "actions": [],
-                  "fields": [
-                    {
-                      "name": "endpointUrl",
-                      "description": "Gets the program's own endpoint URL",
-                      "type": "String",
-                      "params": [],
-                      "hints": {}
-                    }
-                  ],
-                  "events": []
-                }
-              ],
-              "imports": []
-            },
-            "source": {
-              "Program": "tbd"
-            }
-          },
-          {
-            "name": "sys-clock",
-            "schema": {
-              "types": [
-                {
-                  "name": "Root",
-                  "description": "",
-                  "actions": [
-                    {
-                      "name": "sleep",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "seconds",
-                          "type": "Float"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ],
-                  "fields": [],
-                  "events": [
-                    {
-                      "name": "timer",
-                      "description": "",
-                      "type": "TimerEvent",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "spec",
-                          "type": "String"
-                        },
-                        {
-                          "name": "maxCount",
-                          "type": "Int"
-                        }
-                      ],
-                      "hints": {}
-                    },
-                    {
-                      "name": "timerAt",
-                      "description": "",
-                      "type": "TimerEvent",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "seconds",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ]
-                },
-                {
-                  "name": "TimerEvent",
-                  "description": "",
-                  "actions": [],
-                  "fields": [
-                    {
-                      "name": "id",
-                      "description": "",
-                      "type": "String",
-                      "params": [],
-                      "hints": {}
-                    }
-                  ],
-                  "events": []
-                }
-              ],
-              "imports": []
-            },
-            "source": {
-              "Program": "tbd"
-            }
-          },
-          {
-            "name": "sys-user",
-            "schema": {
-              "types": [
-                {
-                  "name": "Root",
-                  "description": "",
-                  "actions": [
-                    {
-                      "name": "configureSms",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "number",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    },
-                    {
-                      "name": "configureEmail",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "number",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ],
-                  "fields": [
-                    {
-                      "name": "sms",
-                      "description": "",
-                      "type": "SmsChannel",
-                      "params": [],
-                      "hints": {}
-                    },
-                    {
-                      "name": "email",
-                      "description": "",
-                      "type": "EmailChannel",
-                      "params": [],
-                      "hints": {}
-                    }
-                  ],
-                  "events": []
-                },
-                {
-                  "name": "SmsChannel",
-                  "description": "",
-                  "actions": [
-                    {
-                      "name": "tell",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "message",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    },
-                    {
-                      "name": "ask",
-                      "description": "",
-                      "type": "String",
-                      "params": [
-                        {
-                          "name": "question",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ],
-                  "fields": [],
-                  "events": []
-                },
-                {
-                  "name": "EmailChannel",
-                  "description": "",
-                  "actions": [
-                    {
-                      "name": "tell",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "message",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    },
-                    {
-                      "name": "ask",
-                      "description": "",
-                      "type": "String",
-                      "params": [
-                        {
-                          "name": "question",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ],
-                  "fields": [],
-                  "events": []
-                }
-              ],
-              "imports": []
-            },
-            "source": {
-              "Program": "tbd"
-            }
-          },
-          {
-            "name": "sys-clock",
-            "schema": {
-              "types": [
-                {
-                  "name": "Root",
-                  "description": "",
-                  "actions": [
-                    {
-                      "name": "sleep",
-                      "description": "",
-                      "type": "Void",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "seconds",
-                          "type": "Float"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ],
-                  "fields": [],
-                  "events": [
-                    {
-                      "name": "timer",
-                      "description": "",
-                      "type": "TimerEvent",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "spec",
-                          "type": "String"
-                        },
-                        {
-                          "name": "maxCount",
-                          "type": "Int"
-                        }
-                      ],
-                      "hints": {}
-                    },
-                    {
-                      "name": "timerAt",
-                      "description": "",
-                      "type": "TimerEvent",
-                      "params": [
-                        {
-                          "name": "key",
-                          "type": "String"
-                        },
-                        {
-                          "name": "seconds",
-                          "type": "String"
-                        }
-                      ],
-                      "hints": {}
-                    }
-                  ]
-                },
-                {
-                  "name": "TimerEvent",
-                  "description": "",
-                  "actions": [],
-                  "fields": [
-                    {
-                      "name": "id",
-                      "description": "",
-                      "type": "String",
-                      "params": [],
-                      "hints": {}
-                    }
-                  ],
-                  "events": []
-                }
-              ],
-              "imports": []
-            },
-            "source": {
-              "Program": ""
-            }
-          },
-          {
-            "name": "sys-process",
-            "schema": {
-              "types": [
-                {
-                  "name": "Root",
-                  "description": "",
-                  "actions": [],
-                  "fields": [
-                    {
-                      "name": "endpointUrl",
-                      "description": "Gets the program's own endpoint URL",
-                      "type": "String",
-                      "params": [],
-                      "hints": {}
-                    }
-                  ],
-                  "events": []
-                }
-              ],
-              "imports": []
-            },
-            "source": {
-              "Program": ""
-            }
-          }
-        ]
-      },
-      "source": {
-        "Program": "tbd"
-      }
-    },
     {
       "name": "mailchimp",
       "schema": {
@@ -475,23 +25,33 @@
                 "params": [
                   {
                     "name": "method",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   },
                   {
                     "name": "body",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "path",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   },
                   {
                     "name": "query",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "headers",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   }
                 ],
                 "hints": {}
@@ -503,7 +63,9 @@
                 "params": [
                   {
                     "name": "API_KEY",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   }
                 ],
                 "hints": {}
@@ -514,6 +76,20 @@
                 "name": "audiences",
                 "description": "",
                 "type": "AudienceCollection",
+                "params": [],
+                "hints": {}
+              },
+              {
+                "name": "status",
+                "description": "",
+                "type": "String",
+                "params": [],
+                "hints": {}
+              },
+              {
+                "name": "tests",
+                "description": "",
+                "type": "Tests",
                 "params": [],
                 "hints": {}
               },
@@ -540,7 +116,9 @@
                 "params": [
                   {
                     "name": "id",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   }
                 ],
                 "hints": {}
@@ -552,19 +130,27 @@
                 "params": [
                   {
                     "name": "fields",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "count",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "email",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "offset",
-                    "type": "Int"
+                    "description": "",
+                    "type": "Int",
+                    "optional": true
                   }
                 ],
                 "hints": {}
@@ -768,7 +354,14 @@
             ],
             "events": [
               {
-                "name": "subscriptions",
+                "name": "subscribed",
+                "description": "",
+                "type": "MemberEvent",
+                "params": [],
+                "hints": {}
+              },
+              {
+                "name": "unsubscribed",
                 "description": "",
                 "type": "MemberEvent",
                 "params": [],
@@ -788,7 +381,9 @@
                 "params": [
                   {
                     "name": "hash",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": false
                   }
                 ],
                 "hints": {}
@@ -800,19 +395,27 @@
                 "params": [
                   {
                     "name": "fields",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "count",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "email",
-                    "type": "String"
+                    "description": "",
+                    "type": "String",
+                    "optional": true
                   },
                   {
                     "name": "offset",
-                    "type": "Int"
+                    "description": "",
+                    "type": "Int",
+                    "optional": true
                   }
                 ],
                 "hints": {}
@@ -1540,9 +1143,17 @@
                 "hints": {}
               },
               {
-                "name": "type",
+                "name": "email",
                 "description": "",
                 "type": "String",
+                "params": [],
+                "hints": {}
+              },
+              {
+                "name": "audience",
+                "description": "",
+                "type": "Ref",
+                "ofType": "Audience",
                 "params": [],
                 "hints": {}
               },
@@ -1551,6 +1162,30 @@
                 "description": "A reference to this node",
                 "type": "Ref",
                 "ofType": "MemberEvent",
+                "params": [],
+                "hints": {}
+              }
+            ],
+            "events": []
+          },
+          {
+            "name": "Tests",
+            "description": "",
+            "actions": [
+              {
+                "name": "testGetAudiences",
+                "description": "",
+                "type": "Boolean",
+                "params": [],
+                "hints": {}
+              }
+            ],
+            "fields": [
+              {
+                "name": "gref",
+                "description": "A reference to this node",
+                "type": "Ref",
+                "ofType": "Tests",
                 "params": [],
                 "hints": {}
               }
@@ -1574,15 +1209,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1594,15 +1235,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1614,15 +1261,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1634,18 +1287,64 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
+                    },
+                    {
+                      "name": "endpoint",
+                      "description": "The endpoint action",
+                      "type": "String",
+                      "params": [
+                        {
+                          "name": "method",
+                          "description": "HTTP method",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "path",
+                          "description": "HTTP path",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "query",
+                          "description": "HTTP query string, encoded as JSON",
+                          "type": "String",
+                          "optional": true
+                        },
+                        {
+                          "name": "headers",
+                          "description": "HTTP headers, encoded as JSON",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "body",
+                          "description": "HTTP body, if any",
+                          "type": "String",
+                          "optional": true
+                        }
+                      ],
+                      "hints": {
+                        "hidden": true
+                      }
                     }
                   ],
                   "fields": [
@@ -1663,11 +1362,15 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1679,12 +1382,16 @@
                       "params": [
                         {
                           "name": "api",
-                          "type": "String"
+                          "description": "The API to use. Check https://www.membrane.io/docs for a list of APIs that support this",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "authId",
+                          "description": "An arbitrary gref that uniquely identifies this program.",
                           "type": "Ref",
-                          "ofType": "String"
+                          "ofType": "String",
+                          "optional": false
                         }
                       ],
                       "hints": {}
@@ -1755,15 +1462,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1775,15 +1488,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1795,15 +1514,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1815,15 +1540,21 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         },
                         {
                           "name": "body",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": true
                         }
                       ],
                       "hints": {}
@@ -1837,11 +1568,15 @@
                       "params": [
                         {
                           "name": "url",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "headers",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         }
                       ],
                       "hints": {}
@@ -1881,15 +1616,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -1901,15 +1642,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -1921,15 +1668,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -1941,15 +1694,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -1963,11 +1722,15 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -1979,12 +1742,16 @@
                             "params": [
                               {
                                 "name": "api",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "authId",
+                                "description": "",
                                 "type": "Ref",
-                                "ofType": "String"
+                                "ofType": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2039,15 +1806,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2059,15 +1832,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2079,15 +1858,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2099,15 +1884,21 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "body",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2121,11 +1912,15 @@
                             "params": [
                               {
                                 "name": "url",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "headers",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2162,11 +1957,15 @@
                             "params": [
                               {
                                 "name": "key",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "seconds",
-                                "type": "Float"
+                                "description": "",
+                                "type": "Float",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2181,15 +1980,21 @@
                             "params": [
                               {
                                 "name": "key",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "spec",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "maxCount",
-                                "type": "Int"
+                                "description": "",
+                                "type": "Int",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2201,11 +2006,15 @@
                             "params": [
                               {
                                 "name": "key",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               },
                               {
                                 "name": "seconds",
-                                "type": "String"
+                                "description": "",
+                                "type": "String",
+                                "optional": false
                               }
                             ],
                             "hints": {}
@@ -2281,11 +2090,15 @@
                       "params": [
                         {
                           "name": "key",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "seconds",
-                          "type": "Float"
+                          "description": "",
+                          "type": "Float",
+                          "optional": false
                         }
                       ],
                       "hints": {}
@@ -2300,15 +2113,21 @@
                       "params": [
                         {
                           "name": "key",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "spec",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "maxCount",
-                          "type": "Int"
+                          "description": "",
+                          "type": "Int",
+                          "optional": false
                         }
                       ],
                       "hints": {}
@@ -2320,11 +2139,333 @@
                       "params": [
                         {
                           "name": "key",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         },
                         {
                           "name": "seconds",
-                          "type": "String"
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        }
+                      ],
+                      "hints": {}
+                    }
+                  ]
+                },
+                {
+                  "name": "TimerEvent",
+                  "description": "",
+                  "actions": [],
+                  "fields": [
+                    {
+                      "name": "id",
+                      "description": "",
+                      "type": "String",
+                      "params": [],
+                      "hints": {}
+                    }
+                  ],
+                  "events": []
+                }
+              ],
+              "imports": []
+            },
+            "source": {
+              "Program": ""
+            }
+          },
+          {
+            "name": "sys-process",
+            "schema": {
+              "types": [
+                {
+                  "name": "Root",
+                  "description": "",
+                  "actions": [],
+                  "fields": [
+                    {
+                      "name": "endpointUrl",
+                      "description": "Gets the program's own endpoint URL",
+                      "type": "String",
+                      "params": [],
+                      "hints": {}
+                    }
+                  ],
+                  "events": []
+                }
+              ],
+              "imports": []
+            },
+            "source": {
+              "Program": ""
+            }
+          }
+        ]
+      },
+      "source": {
+        "Program": "tbd"
+      }
+    },
+    {
+      "name": "sms",
+      "schema": {
+        "types": [
+          {
+            "name": "Root",
+            "description": "Send yourself text messages",
+            "actions": [
+              {
+                "name": "configure",
+                "description": "Configure your phone number to send and receive text messages.\nPrefix with '+' sign followed by country code.",
+                "type": "Void",
+                "params": [
+                  {
+                    "name": "number",
+                    "description": "",
+                    "type": "String",
+                    "optional": false
+                  }
+                ],
+                "hints": {}
+              },
+              {
+                "name": "send",
+                "description": "Sends an SMS to the configured phone number",
+                "type": "Void",
+                "params": [
+                  {
+                    "name": "message",
+                    "description": "",
+                    "type": "String",
+                    "optional": false
+                  }
+                ],
+                "hints": {}
+              },
+              {
+                "name": "handleSms",
+                "description": "Tells the user program that an sms was received. You don't normally have to use this.",
+                "type": "Void",
+                "params": [
+                  {
+                    "name": "message",
+                    "description": "",
+                    "type": "String",
+                    "optional": false
+                  }
+                ],
+                "hints": {
+                  "hidden": true
+                }
+              },
+              {
+                "name": "endpoint",
+                "description": "The endpoint action",
+                "type": "String",
+                "params": [
+                  {
+                    "name": "method",
+                    "description": "HTTP method",
+                    "type": "String",
+                    "optional": false
+                  },
+                  {
+                    "name": "path",
+                    "description": "HTTP path",
+                    "type": "String",
+                    "optional": false
+                  },
+                  {
+                    "name": "query",
+                    "description": "HTTP query string, encoded as JSON",
+                    "type": "String",
+                    "optional": true
+                  },
+                  {
+                    "name": "headers",
+                    "description": "HTTP headers, encoded as JSON",
+                    "type": "String",
+                    "optional": false
+                  },
+                  {
+                    "name": "body",
+                    "description": "HTTP body, if any",
+                    "type": "String",
+                    "optional": true
+                  }
+                ],
+                "hints": {
+                  "hidden": true
+                }
+              }
+            ],
+            "fields": [
+              {
+                "name": "gref",
+                "description": "A reference to this node",
+                "type": "Ref",
+                "ofType": "Root",
+                "params": [],
+                "hints": {}
+              }
+            ],
+            "events": [
+              {
+                "name": "received",
+                "description": "",
+                "type": "ReceivedEvent",
+                "params": [],
+                "hints": {}
+              }
+            ]
+          },
+          {
+            "name": "ReceivedEvent",
+            "description": "",
+            "actions": [],
+            "fields": [
+              {
+                "name": "message",
+                "description": "",
+                "type": "String",
+                "params": [],
+                "hints": {}
+              },
+              {
+                "name": "gref",
+                "description": "A reference to this node",
+                "type": "Ref",
+                "ofType": "ReceivedEvent",
+                "params": [],
+                "hints": {}
+              }
+            ],
+            "events": []
+          }
+        ],
+        "imports": [
+          {
+            "name": "sys-sms",
+            "schema": {
+              "types": [
+                {
+                  "name": "Root",
+                  "description": "",
+                  "actions": [
+                    {
+                      "name": "configure",
+                      "description": "",
+                      "type": "Void",
+                      "params": [
+                        {
+                          "name": "number",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        }
+                      ],
+                      "hints": {}
+                    },
+                    {
+                      "name": "send",
+                      "description": "",
+                      "type": "Void",
+                      "params": [
+                        {
+                          "name": "message",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        }
+                      ],
+                      "hints": {}
+                    }
+                  ],
+                  "fields": [],
+                  "events": []
+                }
+              ],
+              "imports": []
+            },
+            "source": {
+              "Program": "tbd"
+            }
+          },
+          {
+            "name": "sys-clock",
+            "schema": {
+              "types": [
+                {
+                  "name": "Root",
+                  "description": "",
+                  "actions": [
+                    {
+                      "name": "sleep",
+                      "description": "",
+                      "type": "Void",
+                      "params": [
+                        {
+                          "name": "key",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "seconds",
+                          "description": "",
+                          "type": "Float",
+                          "optional": false
+                        }
+                      ],
+                      "hints": {}
+                    }
+                  ],
+                  "fields": [],
+                  "events": [
+                    {
+                      "name": "timer",
+                      "description": "",
+                      "type": "TimerEvent",
+                      "params": [
+                        {
+                          "name": "key",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "spec",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "maxCount",
+                          "description": "",
+                          "type": "Int",
+                          "optional": false
+                        }
+                      ],
+                      "hints": {}
+                    },
+                    {
+                      "name": "timerAt",
+                      "description": "",
+                      "type": "TimerEvent",
+                      "params": [
+                        {
+                          "name": "key",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
+                        },
+                        {
+                          "name": "seconds",
+                          "description": "",
+                          "type": "String",
+                          "optional": false
                         }
                       ],
                       "hints": {}
