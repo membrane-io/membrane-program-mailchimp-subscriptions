@@ -24,7 +24,7 @@ export async function configure({ audienceId }) {
   await audience.subscribed.$subscribe(root.handler);
 }
 
-export async function handler({ event }) {
+export async function handler(_, { event }) {
   await nodes.sms.send({
     message: `New subscriber on "${state.name}": ${event.email}`,
   });
