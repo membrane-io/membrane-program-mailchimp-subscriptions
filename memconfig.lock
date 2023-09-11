@@ -1,12 +1,12 @@
 {
   "types": {
-    "mailchimp": {
-      "gref_hash": "33e52790160ebefdd42401825dc847ab32e37446f05416f0a1075fcffd03dbd2",
-      "type": "mailchimp:Root"
-    },
     "sms": {
       "gref_hash": "9f3731cc47302939f352abadad67485a33ed9eb069680d1c83dfcd21f1656c5e",
       "type": "sms:Root"
+    },
+    "mailchimp": {
+      "gref_hash": "33e52790160ebefdd42401825dc847ab32e37446f05416f0a1075fcffd03dbd2",
+      "type": "mailchimp:Root"
     }
   },
   "imports": [

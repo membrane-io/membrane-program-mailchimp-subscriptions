@@ -14,9 +14,13 @@ export const Root = {
   },
 };
 
-export async function configure({ args: { audienceId } }) {
+export async function configure({ audienceId }) {
   const audience = mailchimp.audiences.one({ id: audienceId });
+
+  // Store the audience name so we can send it in the text.
   state.name = await audience.name;
+
+  // Subscribe to the event. It will unsubscribed when this program is killed.
   await audience.subscribed.$subscribe(root.handler);
 }
 
