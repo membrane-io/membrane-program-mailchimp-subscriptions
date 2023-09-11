@@ -6,8 +6,8 @@ const { mailchimp } = nodes;
 
 export const Root = {
   status: () => {
-    if (!state.guildId) {
-      return "Please set the audienceId with [configure](:configure)";
+    if (!state.name) {
+      return "Please [configure](:configure) the audienceId";
     } else {
       return "Ready";
     }
